@@ -68,11 +68,11 @@ If you encounter any issues or have questions about using the Drift Mode resourc
 
 ## License
 
-This resource is licensed under the [MIT License](https://github.com/ethanfs20/driftmode/edit/main/LICENSE.md). You are free to use, modify, and distribute the resource as long as you include the original license file.
+This resource is licensed under the [MIT License](https://github.com/ethanfs20/driftmode/blob/main/LICENSE). You are free to use, modify, and distribute the resource as long as you include the original license file.
 
 ## Credits
 
 Author: Ethan4t0r
-GitHub Repository: https://github.com/ethanfs20/driftmode/edit/main/README.md
+GitHub Repository: https://github.com/ethanfs20/driftmode/main/README.md
 
 A special thanks to the FiveM community for the support and feedback!
