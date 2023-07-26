@@ -4,7 +4,7 @@ local defaultHandling = {}
 RegisterNetEvent('driftmode:initClient')
 AddEventHandler('driftmode:initClient', function()
     if Config.vehicleWhitelist then
-        local ped = GetPlayerPed(-1)
+        local ped = PlayerPedId()
         local pedVehicle = GetVehiclePedIsIn(ped)
         local vehicleModel = GetEntityModel(pedVehicle)
         local isWhitelisted = false
@@ -30,7 +30,7 @@ AddEventHandler('driftmode:initClient', function()
     end
 
     if Config.vehicleClassWhitelist then
-        local ped = GetPlayerPed(-1)
+        local ped = PlayerPedId()
         local pedVehicle = GetVehiclePedIsIn(ped)
         local vehicleClass = GetVehicleClass(pedVehicle)
         local isWhitelisted = false
@@ -72,7 +72,7 @@ AddEventHandler('driftmode:initClient', function()
 end)
 
 function modifyHandling()
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     local pedVehicle = GetVehiclePedIsIn(ped)
 
     if driftModeEnabled then
