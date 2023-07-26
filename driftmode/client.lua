@@ -77,27 +77,8 @@ function modifyHandling()
 
     if driftModeEnabled then
         -- Store current handling values as default for the vehicle
-        local vehicleModel = GetEntityModel(pedVehicle)
-        defaultHandling[vehicleModel] = {
-            maxFlatVel = GetVehicleHandlingFloat(pedVehicle, "CHandlingData",
-                                                 "fInitialDriveMaxFlatVel"),
-            driveBiasFront = GetVehicleHandlingFloat(pedVehicle,
-                                                     "CHandlingData",
-                                                     "fDriveBiasFront"),
-            tractionCurveMax = GetVehicleHandlingFloat(pedVehicle,
-                                                       "CHandlingData",
-                                                       "fTractionCurveMax"),
-            tractionCurveMin = GetVehicleHandlingFloat(pedVehicle,
-                                                       "CHandlingData",
-                                                       "fTractionCurveMin")
-        }
-        for index, value in ipairs(Config.handleMods) do
-            SetVehicleHandlingFloat(pedVehicle, "CHandlingData", value[1],
-                                    GetVehicleHandlingFloat(pedVehicle,
-                                                            "CHandlingData",
-                                                            value[1]) + value[2] *
-                                        1)
-        end
+        SetDriftTyresEnabled(pedVehicle, 1)
+        SetReduceDriftVehicleSuspension(pedVehicle, 1)
         if Config.twostep then
             Citizen.CreateThread(function()
                 local all_part = {} -- Move the all_part table here to handle drift smoke particles separately
@@ -125,7 +106,7 @@ function modifyHandling()
                 if IsPedInAnyVehicle(ped) then
                     local RPM = GetVehicleCurrentRpm(pedVehicle)
 
-                    if GetPedInVehicleSeat(pedVehicle, -1) == ped and RPM > 0.2 then
+                    if GetPedInVehicleSeat(pedVehicle, -1) == ped and speed > 5 then
                         for i = 0, 20 do -- Increased density to 20
                             UseParticleFxAssetNextCall("core")
                             local W1 = StartParticleFxLoopedOnEntityBone(
@@ -155,25 +136,8 @@ function modifyHandling()
         end)
     else
         -- Reset handling properties to default
-        if defaultHandling[GetEntityModel(pedVehicle)] then
-            SetVehicleHandlingFloat(pedVehicle, "CHandlingData",
-                                    "fInitialDriveMaxFlatVel",
-                                    defaultHandling[GetEntityModel(pedVehicle)]
-                                        .maxFlatVel)
-            SetVehicleHandlingFloat(pedVehicle, "CHandlingData",
-                                    "fDriveBiasFront",
-                                    defaultHandling[GetEntityModel(pedVehicle)]
-                                        .driveBiasFront)
-            SetVehicleHandlingFloat(pedVehicle, "CHandlingData",
-                                    "fTractionCurveMax",
-                                    defaultHandling[GetEntityModel(pedVehicle)]
-                                        .tractionCurveMax)
-            SetVehicleHandlingFloat(pedVehicle, "CHandlingData",
-                                    "fTractionCurveMin",
-                                    defaultHandling[GetEntityModel(pedVehicle)]
-                                        .tractionCurveMin)
-            SetVehicleEnginePowerMultiplier(pedVehicle, 100.0)
-        end
+        SetDriftTyresEnabled(pedVehicle, 0)
+        SetReduceDriftVehicleSuspension(pedVehicle, 0)
     end
 end
 
