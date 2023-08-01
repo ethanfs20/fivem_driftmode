@@ -7,11 +7,11 @@ author 'Ethan4t0r'
 description 'A drift mode script for GTA V'
 
 client_scripts {
-    'client.lua',
-    'config.lua'
+    'config.lua',
+    'client.lua'
 }
 
 server_scripts {
-    'server.lua',
-    'config.lua'
+    'config.lua',
+    'server.lua'
 }
