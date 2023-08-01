@@ -1,3 +1,20 @@
+local QBCore = nil
+if Config.qbcore then
+    QBCore = exports['qb-core']:GetCoreObject()
+    exports['qb-core']:AddItem(Config.item, {
+        name = Config.item,
+        label = 'Drift Key',
+        weight = 1,
+        type = 'item',
+        image = '',
+        unique = true,
+        useable = false,
+        shouldClose = true,
+        combinable = nil,
+        description = 'A key that enables drift mode.'
+    })
+end
+
 RegisterCommand("driftmode", function(source, args, rawCommand)
     local source = source
     if source ~= nil then
