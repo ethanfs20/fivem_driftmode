@@ -1,6 +1,8 @@
 local driftModeEnabled = false
 local currentVeh = nil
 local all_part = {}
+local QBCore = nil
+if Config.qbcore then QBCore = exports['qb-core']:GetCoreObject() end
 
 local function IsVehicleWhitelisted(pedVehicle)
     local vehicleModel = GetEntityModel(pedVehicle)
@@ -32,9 +34,24 @@ local function notify(message)
     })
 end
 
+function QBCore.Functions.HasItem(item)
+    local p = promise.new()
+    QBCore.Functions.TriggerCallback('QBCore:HasItem',
+                                     function(result) p:resolve(result) end,
+                                     item)
+    return Citizen.Await(p)
+end
+
 function ToggleDriftMode()
     local ped = PlayerPedId()
     local pedVehicle = GetVehiclePedIsIn(ped)
+    if Config.qbcore then
+        print(Config.item)
+        if not QBCore.Functions.HasItem(Config.item) then
+            notify("You need the required item to use Drift Mode.")
+            return
+        end
+    end
     currentVeh = pedVehicle
 
     if not IsPedInAnyVehicle(ped) then
