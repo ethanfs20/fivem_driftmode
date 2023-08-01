@@ -1,4 +1,6 @@
 Config = {
+    qbcore = true,
+    item = 'driftkey',
     permissionsBased = false,
     permissionName = 'driftmode.use',
     -- https://forum.cfx.re/t/basic-aces-principals-overview-guide/90917
@@ -14,11 +16,5 @@ Config = {
     keybind = true,
     startKey = 38,
 
-    twostep = false,
-    handleMods = {
-        {"fInitialDragCoeff", 90.22}, {"fDriveInertia", .31},
-        {"fSteeringLock", 22}, {"fTractionCurveMax", -1.1},
-        {"fTractionCurveMin", -.4}, {"fTractionCurveLateral", 2.5},
-        {"fLowSpeedTractionLossMult", -.57}
-    }
+    twostep = false
 }
